@@ -1,10 +1,5 @@
 # ⚽ KickQuiz
 
-![Static Badge](https://img.shields.io/badge/Sprache-JavaScript-%23f7df1e)
-![Static Badge](https://img.shields.io/badge/Kurs-MMP_IM2-blue)
-![Static Badge](https://img.shields.io/badge/Semester-FS26-coral)
-![Static Badge](https://img.shields.io/badge/Status-Abgabe_bereit-1f883d)
-
 ## Projektidee
 
 KickQuiz ist ein interaktives Fussball-Quiz. Man sieht 6 Teams und muss 6 Statistik-Kategorien — zum Beispiel Meistertitel oder Tore pro Saison — den richtigen Teams zuordnen. Das Ziel ist es, möglichst viele Punkte zu sammeln, indem man die Kategorie wählt, in der das jeweilige Team am besten abschneidet. Am Ende wird die eigene Lösung mit der optimalen Antwort verglichen.
