@@ -44,22 +44,23 @@ Nach dem Spiel wird deine Route mit der **idealen Route** verglichen — berechn
 
 ## Tech Stack
 
-| Technologie | Einsatz |
-|---|---|
-| **Vanilla JS ES2020** | Gesamte Spiellogik, `type="module"`, `async/await` |
-| **HTML5 / CSS3** | Markup, Flexbox-Layouts, CSS-Transitions |
-| **PHP-Proxy** (`api-proxy.php`) | CORS-Umgehung für football-data.org |
-| **football-data.org API v4** | Ligatabellen, Spielergebnisse (Liga Edition) |
-| **openfootball/worldcup.json** | WM-Matchdaten 1930–2022 via GitHub Raw (WM Edition) |
-| **@lottiefiles/dotlottie-wc** | `.lottie`-Animations-Web-Component (Ladescreen) |
-| **Google Fonts** | Roboto Slab |
-| **localStorage** | Highscore-Persistenz pro Spielmodus |
+| Technologie                     | Einsatz                                             |
+| ------------------------------- | --------------------------------------------------- |
+| **Vanilla JS ES2020**           | Gesamte Spiellogik, `type="module"`, `async/await`  |
+| **HTML5 / CSS3**                | Markup, Flexbox-Layouts, CSS-Transitions            |
+| **PHP-Proxy** (`api-proxy.php`) | CORS-Umgehung für football-data.org                 |
+| **football-data.org API v4**    | Ligatabellen, Spielergebnisse (Liga Edition)        |
+| **openfootball/worldcup.json**  | WM-Matchdaten 1930–2022 via GitHub Raw (WM Edition) |
+| **@lottiefiles/dotlottie-wc**   | `.lottie`-Animations-Web-Component (Ladescreen)     |
+| **Google Fonts**                | Roboto Slab                                         |
+| **localStorage**                | Highscore-Persistenz pro Spielmodus                 |
 
 ---
 
 ## APIs
 
 ### football-data.org v4
+
 - **Dokumentation:** https://www.football-data.org/documentation/quickstart
 - **Endpunkte genutzt:**
   - `GET /v4/competitions/{leagueId}/standings` — Ligatabelle mit Punkten, Toren, etc.
@@ -68,6 +69,7 @@ Nach dem Spiel wird deine Route mit der **idealen Route** verglichen — berechn
 - **CORS:** Requests gehen über `api-proxy.php` (PHP leitet weiter, fügt Header ein)
 
 ### openfootball/worldcup.json
+
 - **Repo:** https://github.com/openfootball/worldcup.json
 - **Kein API-Key nötig**, direkt abrufbar via GitHub Raw URLs
 - **22 Turnier-JSONs** werden parallel via `Promise.all()` geladen
@@ -95,23 +97,24 @@ Nach dem Spiel wird deine Route mit der **idealen Route** verglichen — berechn
 
 ### Aufbau `main.js` (9 Sektionen)
 
-| Sektion | Inhalt |
-|---|---|
-| 1. Konfiguration | Konstanten, Kategorie-Definitionen, API-Endpoints |
-| 2. State | `gameState`-Objekt, Reset-Funktionen |
-| 3. API & Daten | `fetchLeagueData()`, `fetchWMData()`, `processWMData()` |
-| 4. Ranking-Berechnung | `buildRankings()` für Liga- und WM-Kategorien |
-| 5. Ideal-Route | `computeGlobalIdealRoute()` via Backtracking (6! Permutationen) |
-| 6. Spielablauf | `startGame()`, `displayRound()`, `handleAnswer()`, `nextRound()` |
-| 7. Punkte-Logik | `calculateRoundPoints()` — relatives Ranking unter 6 Optionen |
-| 8. UI-Utilities | `showScreen()`, `setSubtitle()`, `shuffle()`, `renderProgressBar()` |
-| 9. Result-Screen | `showResult()`, Slider-Vergleich, Highscore-Verwaltung |
+| Sektion               | Inhalt                                                              |
+| --------------------- | ------------------------------------------------------------------- |
+| 1. Konfiguration      | Konstanten, Kategorie-Definitionen, API-Endpoints                   |
+| 2. State              | `gameState`-Objekt, Reset-Funktionen                                |
+| 3. API & Daten        | `fetchLeagueData()`, `fetchWMData()`, `processWMData()`             |
+| 4. Ranking-Berechnung | `buildRankings()` für Liga- und WM-Kategorien                       |
+| 5. Ideal-Route        | `computeGlobalIdealRoute()` via Backtracking (6! Permutationen)     |
+| 6. Spielablauf        | `startGame()`, `displayRound()`, `handleAnswer()`, `nextRound()`    |
+| 7. Punkte-Logik       | `calculateRoundPoints()` — relatives Ranking unter 6 Optionen       |
+| 8. UI-Utilities       | `showScreen()`, `setSubtitle()`, `shuffle()`, `renderProgressBar()` |
+| 9. Result-Screen      | `showResult()`, Slider-Vergleich, Highscore-Verwaltung              |
 
 ---
 
 ## Lokal starten
 
 ### Voraussetzungen
+
 - Python 3 (für lokalen Dev-Server)
 - PHP-CLI (für den API-Proxy, oder ein lokaler Apache/MAMP)
 
@@ -140,14 +143,14 @@ open http://localhost:8000
 
 Das Punktesystem ist **relativ** — es bewertet deine Wahl im Vergleich zu den anderen 5 Optionen dieser Runde, nicht anhand absoluter Weltrekorde.
 
-| Rang unter den 6 Teams | Punkte |
-|---|---|
+| Rang unter den 6 Teams              | Punkte |
+| ----------------------------------- | ------ |
 | 1 (bestes Team in dieser Kategorie) | **30** |
-| 2 | 25 |
-| 3 | 20 |
-| 4 | 15 |
-| 5 | 10 |
-| 6 (schwächstes Team) | 5 |
+| 2                                   | 25     |
+| 3                                   | 20     |
+| 4                                   | 15     |
+| 5                                   | 10     |
+| 6 (schwächstes Team)                | 5      |
 
 **Maximum pro Spiel: 180 Punkte** (6 Runden × 30 Punkte)
 
