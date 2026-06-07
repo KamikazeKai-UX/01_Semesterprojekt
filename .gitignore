@@ -1,5 +1,19 @@
-.DS_Store
+# API-Key (NIEMALS auf GitHub hochladen!)
 config.php
-.vscode
+config.js
+
+# macOS System-Dateien
+.DS_Store
+
+# Environment-Variablen
 .env
-node_modules
+
+# Python (falls Cache angelegt wird)
+__pycache__/
+*.pyc
+
+# Node.js (falls später benötigt)
+node_modules/
+
+# Editor-Dateien
+.idea/

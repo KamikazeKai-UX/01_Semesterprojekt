@@ -3,23 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail API</title>
+    <title>KickQuiz</title>
+
+    <!-- Roboto Slab von Google Fonts (für Frage-Text und Antwort-Buttons) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- DotLottie Web Component (unterstützt .lottie-Format) -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Vorlage für interaktive Medien 2</h1>
 
-    </header>
-    <main>
-        <h2>Main Content</h2>
-        <p>This is the main content of the page.</p>
+    <!-- =============================================
+         LADE-SCREEN
+         Logo + 3 animierte Punkte
+    ============================================= -->
+    <div id="screen-loading" class="screen active">
+        <div class="logo-block">
+            <div class="logo-title">KICKQUIZ</div>
+            <div class="logo-subtitle js-subtitle">Edition wählen</div>
+        </div>
+        <dotlottie-wc
+            id="lottie-loading"
+            src="https://lottie.host/4ba168a7-f4e6-4313-ba37-1962f267f6f4/xBnZWmIIm9.lottie"
+            style="width:300px;height:300px"
+            autoplay>
+        </dotlottie-wc>
+    </div>
 
-    </main>
-    <footer>
-        <p>This is the footer of the page.</p>
+    <!-- =============================================
+         MODUS-SCREEN
+         Wähle Liga Edition oder WM Edition
+    ============================================= -->
+    <div id="screen-mode" class="screen">
+        <div class="logo-block">
+            <div class="logo-title">KICKQUIZ</div>
+            <div class="logo-subtitle js-subtitle">Edition wählen</div>
+        </div>
 
-    </footer>
-    <script src="js/script.js" type="module"></script>
+        <div class="info-card">
+            <h2 class="info-card__title">Wähle einen Modus</h2>
+            <p class="info-card__text">
+                Du siehst ein Team und <strong>6 Kategorien</strong>. Wähle die, in der
+                das Team am besten abschneidet — sie wird dem Team zugewiesen.
+                <strong>6 Runden</strong>, am Ende vergleichst du deine Route mit der idealen.
+            </p>
+            <div class="mode-grid">
+                <button class="btn-mode" id="btn-mode-liga">
+                    <span class="btn-mode__icon">⚽</span>
+                    <div class="btn-mode__text">
+                        <span class="btn-mode__title">Liga Edition</span>
+                        <span class="btn-mode__sub">Premier League · Bundesliga · Serie A · La Liga</span>
+                    </div>
+                </button>
+                <button class="btn-mode" id="btn-mode-wm">
+                    <span class="btn-mode__icon">🏆</span>
+                    <div class="btn-mode__text">
+                        <span class="btn-mode__title">WM Edition</span>
+                        <span class="btn-mode__sub">Alle WM-Turniere 1930–2022 · Alltime-Statistiken</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================
+         LIGA-START-SCREEN
+         Logo + Beschreibungskarte + Liga-Auswahl
+    ============================================= -->
+    <div id="screen-start" class="screen">
+        <div class="logo-block">
+            <div class="logo-title">KICKQUIZ</div>
+            <div class="logo-subtitle js-subtitle">Liga Edition</div>
+        </div>
+
+        <div class="info-card">
+            <h2 class="info-card__title">Wähle eine Liga</h2>
+            <div class="league-grid">
+                <button class="btn-league" data-league-id="PL">
+                    <span class="btn-league__flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+                    <span class="btn-league__name">Premier League</span>
+                </button>
+                <button class="btn-league" data-league-id="BL1">
+                    <span class="btn-league__flag">🇩🇪</span>
+                    <span class="btn-league__name">Bundesliga</span>
+                </button>
+                <button class="btn-league" data-league-id="SA">
+                    <span class="btn-league__flag">🇮🇹</span>
+                    <span class="btn-league__name">Serie A</span>
+                </button>
+                <button class="btn-league" data-league-id="PD">
+                    <span class="btn-league__flag">🇪🇸</span>
+                    <span class="btn-league__name">La Liga</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============================================
+         QUIZ-SCREEN
+         Frage-Card. "Nächste Frage" liegt AUSSERHALB
+         der Card (auf dem Gras, wie im Figma-Design)
+    ============================================= -->
+    <div id="screen-quiz" class="screen">
+        <div class="logo-block">
+            <div class="logo-title">KICKQUIZ</div>
+            <div class="logo-subtitle js-subtitle">Liga Edition</div>
+        </div>
+
+        <div class="quiz-card">
+            <!-- Header: Frage-Nummer + Haus-Button -->
+            <div class="quiz-card__header">
+                <span id="round-display" class="quiz-card__round">Runde 1 von 6</span>
+                <span id="score-badge" class="quiz-card__score">0 Punkte</span>
+                <button id="btn-abort" class="btn-abort" title="Spiel abbrechen">
+                    <!-- Haus-Icon (Material Design) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Fortschrittsbalken (6 Segmente, via JS befüllt) -->
+            <div id="progress-bar" class="progress-bar"></div>
+
+            <!-- Team-Anzeige (Wappen / Flagge + Name) -->
+            <div class="team-block">
+                <img id="team-crest" class="team-crest" src="" alt="Team">
+                <span id="team-name" class="team-name">Lädt…</span>
+            </div>
+
+            <!-- Frage-Text -->
+            <p id="question-text" class="question-text">Frage wird geladen…</p>
+
+            <!-- Antwort-Buttons (via JS erzeugt) -->
+            <div id="answer-grid" class="answer-grid"></div>
+
+            <!-- Feedback-Zeile (nach Antwort, anfangs hidden) -->
+            <div id="feedback-bar" class="feedback-bar hidden">
+                <div class="feedback-bar__icon-wrap">
+                    <img id="feedback-icon" class="feedback-bar__icon" src="" alt="">
+                </div>
+                <p id="feedback-text" class="feedback-bar__text"></p>
+            </div>
+        </div>
+
+        <!-- "Nächste Frage" liegt AUSSERHALB der Card -->
+        <button id="btn-next" class="btn-next hidden">Nächste Frage</button>
+    </div>
+
+    <!-- =============================================
+         ERGEBNIS-SCREEN
+    ============================================= -->
+    <div id="screen-result" class="screen">
+        <div class="logo-block">
+            <div class="logo-title">KICKQUIZ</div>
+            <div class="logo-subtitle js-subtitle">Liga Edition</div>
+        </div>
+
+        <div class="info-card result-card">
+            <h2 class="info-card__title">Quiz beendet!</h2>
+            <div class="result-score">
+                <span id="result-score-value">0</span>
+                <span class="result-score__label">Punkte</span>
+            </div>
+            <p id="result-grade" class="result-grade"></p>
+            <p id="result-highscore" class="result-highscore"></p>
+            <div id="result-stats" class="result-stats"></div>
+            <button id="btn-restart" class="btn-primary">Nochmal spielen</button>
+        </div>
+    </div>
+
+    <!-- JS (type="module" für async/await) -->
+    <script src="js/main.js?v=lottie5" type="module"></script>
 </body>
 </html>
