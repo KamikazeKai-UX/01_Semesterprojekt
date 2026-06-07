@@ -7,7 +7,7 @@
 
 ## Projektidee
 
-KickQuiz ist ein interaktives Fussball-Quiz, inspiriert am Flaggen-Ranking-Prinzip. Man sieht 6 Teams und muss 6 Statistik-Kategorien — zum Beispiel Meistertitel, Marktwert oder Tore pro Saison — den richtigen Teams zuordnen. Das Ziel ist es, möglichst viele Punkte zu sammeln, indem man die Kategorie wählt, in der das jeweilige Team weltweit am besten abschneidet. Am Ende wird die eigene Lösung mit der optimalen Route verglichen.
+KickQuiz ist ein interaktives Fussball-Quiz. Man sieht 6 Teams und muss 6 Statistik-Kategorien — zum Beispiel Meistertitel oder Tore pro Saison — den richtigen Teams zuordnen. Das Ziel ist es, möglichst viele Punkte zu sammeln, indem man die Kategorie wählt, in der das jeweilige Team am besten abschneidet. Am Ende wird die eigene Lösung mit der optimalen Antwort verglichen.
 
 Das Projekt gibt es in zwei Varianten: einer **Liga Edition** mit Live-Daten aus vier europäischen Ligen — Premier League, Bundesliga, Serie A und La Liga — sowie einer **WM Edition** mit aggregierten Alltime-Statistiken aus allen 22 Weltmeisterschaften seit 1930.
 
@@ -27,7 +27,7 @@ Nach dem Spiel sieht man, wie die eigene Route mit der idealen verglichen wird. 
 - PHP als Proxy für die API-Anfragen
 - LottieFiles für die Ladeanimation
 - localStorage für den Highscore
-- Claude AI als Unterstützung
+- Claude AI als grosse Unterstützung ;)
 
 ## Projektstruktur
 
@@ -37,17 +37,12 @@ Nach dem Spiel sieht man, wie die eigene Route mit der idealen verglichen wird. 
 ├── css/style.css     ← Styling und Responsive Design
 ├── js/main.js        ← Gesamte Spiellogik
 ├── api-proxy.php     ← PHP-Proxy für die API
-├── config.php        ← API-Key (nicht im Repository)
-└── server.py         ← Lokaler Entwicklungsserver
+└── config.php        ← API-Key (nicht im Repository)
 ```
 
 ## Lokal starten
 
-```bash
-python3 server.py
-```
-
-Danach die Seite unter `http://localhost:8000` öffnen. Für die Liga Edition wird zusätzlich PHP benötigt, da die API-Anfragen über einen Proxy laufen. Die WM Edition funktioniert mit dem Python-Server alleine.
+Für die lokale Entwicklung wird ein PHP-fähiger Server benötigt, da die API-Anfragen über einen PHP-Proxy laufen. Empfehlenswert ist MAMP — einfach den Projektordner als Root-Verzeichnis setzen und die Seite unter `http://localhost:8888` öffnen.
 
 ## Was uns beschäftigt hat
 
@@ -73,15 +68,13 @@ Ein kleineres aber störendes Problem war, dass sich die Antwort-Buttons nach je
 
 ## User Testing
 
-Während der Entwicklung haben wir Personen aus unserem Fussballteam das Spiel spielen lassen. Das Feedback war grundsätzlich positiv — das Spielprinzip wurde schnell verstanden und die zwei Editionen kamen gut an.
+Während der Entwicklung haben wir Personen aus dem Fussballteam von Dario das Spiel spielen lassen. Das Feedback war grundsätzlich positiv — das Spielprinzip wurde schnell verstanden und die zwei Editionen kamen gut an.
 
-Der häufigste Kritikpunkt war das Punktesystem: Es war nicht sofort klar, wie die Punkte berechnet werden und warum man manchmal weniger Punkte bekommt als erwartet. Die Spieler hatten das Gefühl, eine gute Wahl getroffen zu haben, und waren überrascht, nur 10 oder 15 Punkte zu erhalten.
-
-Als Reaktion darauf haben wir die Punktevergabe transparenter gemacht und direkt nach jeder Runde angezeigt, welchen Rang die gewählte Kategorie unter den 6 Teams hatte. So ist nachvollziehbar, warum man wie viele Punkte bekommt.
+Der häufigste Kritikpunkt war das Punktesystem: Es war nicht sofort klar, wie die Punkte berechnet werden und warum man manchmal weniger Punkte bekommt als erwartet. Die Spieler hatten das Gefühl, eine gute Wahl getroffen zu haben, und waren am Schluss über das Resultat überrascht.
 
 ## Was gut funktioniert hat
 
-Der Backtracking-Algorithmus für die ideale Route war eine der spannendsten Teile des Projekts. Es war befriedigend zu sehen, wie der Algorithmus alle 720 Kombinationen durchrechnet und die beste Lösung findet — und das in einem Bruchteil einer Sekunde.
+Der Backtracking-Algorithmus für die ideale Route war eine der spannendsten Teile des Projekts. Es war cool zu sehen, wie der Algorithmus alle 720 Kombinationen durchrechnet und die beste Lösung findet — und das in einem Bruchteil einer Sekunde.
 
 Auch die WM Edition mit `Promise.all()` über 22 Turnier-JSONs läuft überraschend schnell. Was nach viel Daten klingt, ist in der Praxis kaum spürbar.
 
@@ -91,4 +84,4 @@ KickQuiz war ein Projekt, das deutlich komplexer wurde als ursprünglich geplant
 
 ## Autor
 
-Dario Hartmann — FHGR MMP FS26
+Dario Hartmann und Kai Dunker — FHGR MMP FS26

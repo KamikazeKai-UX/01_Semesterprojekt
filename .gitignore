@@ -8,10 +8,6 @@ config.js
 # Environment-Variablen
 .env
 
-# Python (falls Cache angelegt wird)
-__pycache__/
-*.pyc
-
 # Node.js (falls später benötigt)
 node_modules/
 
